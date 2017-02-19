@@ -12,7 +12,9 @@ import org.quartz.impl.StdSchedulerFactory;
 public class mainSchedule {
 
 	public static void main(String[] args) {
+		System.out.println("初始化中……");
 		init();
+		System.out.println("每月1号凌晨0点执行，请稍等……");
 	}
 
 	public static void init() {
