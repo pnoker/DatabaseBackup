@@ -18,7 +18,7 @@ public class mainSchedule {
 	public static void init() {
 		try {
 			JobDetail jobDetail = JobBuilder.newJob(mainJob.class).withIdentity("mainJob", "job-group").build();
-			CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("cronTrigger", "trigger-group").withSchedule(CronScheduleBuilder.cronSchedule("0 1 0 1 * ?")).build();
+			CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("cronTrigger", "trigger-group").withSchedule(CronScheduleBuilder.cronSchedule("0 1 0 1 * ? *")).build();
 			SchedulerFactory sFactory = new StdSchedulerFactory();
 			Scheduler scheduler = sFactory.getScheduler();
 			scheduler.scheduleJob(jobDetail, cronTrigger);

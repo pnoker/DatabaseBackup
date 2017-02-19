@@ -13,16 +13,18 @@ public class mainThread {
 
 	public void startMainThread() throws Exception {
 		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.MONTH, -1);// 上个月
-		Date date = calendar.getTime();
+		calendar.add(Calendar.MONTH, -1);// 设置为上个月
+		Date dataOfTable = calendar.getTime();// 表名为上个月的
+		calendar.add(Calendar.MONTH, 1);// 时间节点，设置为本月的
+		Date dataOfTimeNode = calendar.getTime();// 设置时间节点为本月的开始节点
 		TableOption tableOption = new TableOption();
-		if (tableOption.createTable(sdfOfTable.format(date))) {// 创建上个月的表
+		if (tableOption.createTable(sdfOfTable.format(dataOfTable))) {// 创建上个月的表
 			System.out.println("create success");
 			DataOption dataOption = new DataOption();
-			calendar.add(Calendar.MONTH, 1);// 恢复到本月
-			date = calendar.getTime();
-			dataOption.copyData("hart_data", "hart_data_" + sdfOfTable.format(date), sdfOfTimeNode.format(date));
-			dataOption.deleteData("hart_data", sdfOfTimeNode.format(date));
+			boolean isSuccsee = dataOption.copyData("hart_data", "hart_data_" + sdfOfTable.format(dataOfTable), sdfOfTimeNode.format(dataOfTimeNode));
+			if (isSuccsee) {
+				dataOption.deleteData("hart_data", sdfOfTimeNode.format(dataOfTimeNode));
+			}
 		} else {
 			System.out.println("create failure");
 		}

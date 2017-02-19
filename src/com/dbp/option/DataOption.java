@@ -13,15 +13,15 @@ import com.dbp.util.Sqlserver;
 
 public class DataOption {
 
-	public String copyData(String fromTable, String toTable, String timeNode) {
+	public boolean copyData(String fromTable, String toTable, String timeNode) {
 		Sqlserver dbConnect = new Sqlserver();
 		String sql = "insert into " + toTable + "(typeserial,tag,value,reachtime) select typeserial,tag,value,reachtime from " + fromTable + " where reachtime < '" + timeNode + " 00:00:00'";
 		try {
 			dbConnect.executeUpdate(sql);
-			return "The data copy success," + fromTable + " - > " + toTable + " : reachtime < " + timeNode;
+			return true;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
-			return "The data copy failure";
+			return false;
 		} finally {
 			dbConnect.free();
 		}
@@ -36,7 +36,7 @@ public class DataOption {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
-		}finally {
+		} finally {
 			dbConnect.free();
 		}
 	}
