@@ -25,12 +25,12 @@ public class SpiltDataTool {
 		calendar.add(Calendar.MONTH, 1);// 下个月,时间节点
 		Date dataOfTimeNode = calendar.getTime();
 		TableOption tableOption = new TableOption();
-		if (tableOption.createTable(sdfOfTable.format(dataOfTable))) {
+		if (tableOption.createTable("shui_data_" + sdfOfTable.format(dataOfTable))) {
 			System.out.println("create success");
 			DataOption dataOption = new DataOption();
-			boolean isSuccess = dataOption.copyData("hart_data", "hart_data_" + sdfOfTable.format(dataOfTable), sdfOfTimeNode.format(dataOfTimeNode));
+			boolean isSuccess = dataOption.copyData("shui_data", "shui_data_" + sdfOfTable.format(dataOfTable), sdfOfTimeNode.format(dataOfTimeNode));
 			if (isSuccess) {
-				dataOption.deleteData("hart_data", sdfOfTimeNode.format(dataOfTimeNode));
+				dataOption.deleteData("shui_data", sdfOfTimeNode.format(dataOfTimeNode));
 			}
 		} else {
 			System.out.println("create failure");
