@@ -18,15 +18,27 @@ public class mainThread {
 		calendar.add(Calendar.MONTH, 1);// 时间节点，设置为本月的
 		Date dataOfTimeNode = calendar.getTime();// 设置时间节点为本月的开始节点
 		TableOption tableOption = new TableOption();
-		if (tableOption.createTable(sdfOfTable.format(dataOfTable))) {// 创建上个月的表
-			System.out.println("create success");
+		// hart_data
+		if (tableOption.createTable("hart_data_" + sdfOfTable.format(dataOfTable))) {// 创建上个月hart_data_year_month的表
+			System.out.println("hart_data_" + sdfOfTable.format(dataOfTable) + " create success");
 			DataOption dataOption = new DataOption();
 			boolean isSuccsee = dataOption.copyData("hart_data", "hart_data_" + sdfOfTable.format(dataOfTable), sdfOfTimeNode.format(dataOfTimeNode));
 			if (isSuccsee) {
 				dataOption.deleteData("hart_data", sdfOfTimeNode.format(dataOfTimeNode));
 			}
 		} else {
-			System.out.println("create failure");
+			System.out.println("hart_data_" + sdfOfTable.format(dataOfTable) + " create failure");
+		}
+		// shui_data
+		if (tableOption.createTable("shui_data_" + sdfOfTable.format(dataOfTable))) {// 创建上个月shui_data_year_month的表
+			System.out.println("shui_data_" + sdfOfTable.format(dataOfTable) + " create success");
+			DataOption dataOption = new DataOption();
+			boolean isSuccsee = dataOption.copyData("shui_data", "shui_data_" + sdfOfTable.format(dataOfTable), sdfOfTimeNode.format(dataOfTimeNode));
+			if (isSuccsee) {
+				dataOption.deleteData("shui_data", sdfOfTimeNode.format(dataOfTimeNode));
+			}
+		} else {
+			System.out.println("shui_data_" + sdfOfTable.format(dataOfTable) + " create failure");
 		}
 	}
 }

@@ -24,9 +24,9 @@ public class TableOption {
 	 */
 	public boolean createTable(String tableName) {
 		Sqlserver dbConnect = new Sqlserver();
-		String creatTable_sql = "create table hart_data_" + tableName + Hart_Data;
+		String creatTable_sql = "create table " + tableName + Hart_Data;
 		try {
-			if (!findTableByName("hart_data_" + tableName)) {
+			if (!findTableByName(tableName)) {
 				dbConnect.executeUpdate(creatTable_sql);
 				return true;
 			} else {
