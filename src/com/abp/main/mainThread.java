@@ -24,7 +24,8 @@ public class mainThread {
 			DataOption dataOption = new DataOption();
 			boolean isSuccsee = dataOption.copyData("hart_data", "hart_data_" + sdfOfTable.format(dataOfTable), sdfOfTimeNode.format(dataOfTimeNode));
 			if (isSuccsee) {
-				dataOption.deleteData("hart_data", sdfOfTimeNode.format(dataOfTimeNode));
+				// 保留两个月的数据所以删除上个月之前的hart_data数据
+				dataOption.deleteData("hart_data", sdfOfTimeNode.format(dataOfTable));
 			}
 		} else {
 			System.out.println("hart_data_" + sdfOfTable.format(dataOfTable) + " create failure");
@@ -35,7 +36,8 @@ public class mainThread {
 			DataOption dataOption = new DataOption();
 			boolean isSuccsee = dataOption.copyData("shui_data", "shui_data_" + sdfOfTable.format(dataOfTable), sdfOfTimeNode.format(dataOfTimeNode));
 			if (isSuccsee) {
-				dataOption.deleteData("shui_data", sdfOfTimeNode.format(dataOfTimeNode));
+				// 保留两个月的数据所以删除上个月之前的shui_data数据
+				dataOption.deleteData("shui_data", sdfOfTimeNode.format(dataOfTable));
 			}
 		} else {
 			System.out.println("shui_data_" + sdfOfTable.format(dataOfTable) + " create failure");

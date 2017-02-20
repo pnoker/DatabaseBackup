@@ -30,7 +30,8 @@ public class SpiltDataTool {
 			DataOption dataOption = new DataOption();
 			boolean isSuccess = dataOption.copyData("shui_data", "shui_data_" + sdfOfTable.format(dataOfTable), sdfOfTimeNode.format(dataOfTimeNode));
 			if (isSuccess) {
-				dataOption.deleteData("shui_data", sdfOfTimeNode.format(dataOfTimeNode));
+				// 保留两个月的数据所以删除本月之前的数据
+				dataOption.deleteData("shui_data", sdfOfTimeNode.format(dataOfTable));
 			}
 		} else {
 			System.out.println("create failure");
